@@ -42,10 +42,10 @@ class Juego extends Soporte
             if ($min > 1) {
                 $frase = "Juego para " . $min . "jugadores";
             } else {
-                $frase = "Es un juego para un jugador";
+                $frase = "Para un jugador";
             }
         }else{
-            $frase = "Es un juego de ".$min." a ".$max." jugadores";
+            $frase = "Para ".$min." a ".$max." jugadores";
         }
 
         return $frase;
