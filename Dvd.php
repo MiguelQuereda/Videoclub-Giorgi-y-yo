@@ -3,8 +3,6 @@
 include_once "Soporte.php";
 class DVD extends Soporte
 {
- const IVA=1.21;
-
     //CONSTRUCTOR
     public function __construct(
         string $titulo,
@@ -34,15 +32,13 @@ class DVD extends Soporte
         echo parent::muestraResumen();
         echo "Idiomas:".$this->idiomas."<br>";
         echo "Formato de Pantalla:".$this->formaPantalla."<br>";
-
-
     }
 
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
