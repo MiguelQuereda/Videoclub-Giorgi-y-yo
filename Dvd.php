@@ -1,7 +1,7 @@
 <?php
 
 include_once "Soporte.php";
-class CintaVideo extends Soporte
+class DVD extends Soporte
 {
  const IVA=1.21;
 
@@ -10,24 +10,31 @@ class CintaVideo extends Soporte
         string $titulo,
         int $numero,
         float $precio,
-        private int $duracion
+        public string $idiomas,
+        private string $formaPantalla
     ){
         parent::__construct($titulo, $numero, $precio);
     }
 
     //GETTERS
-    public function getDuracion(): int 
+    public function getIdiomas(): string 
     {
-        return $this->duracion;
+        return $this->idiomas;
+    }
+    public function getFormaPantalla(): string 
+    {
+        return $this->formaPantalla;
     }
 
     
     //MÉTODOS
     public function muestraResumen()
     {
-        echo "<br>"."Película en VHS: "."<br>";
+        echo "<br>"."Película en DVD: "."<br>";
         echo parent::muestraResumen();
-        echo "Duración:".$this->duracion." minutos ";
+        echo "Idiomas:".$this->idiomas."<br>";
+        echo "Formato de Pantalla:".$this->formaPantalla."<br>";
+
 
     }
 
@@ -40,7 +47,7 @@ class CintaVideo extends Soporte
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cinta Video</title>
+    <title>DVD</title>
 </head>
 <body>
     
