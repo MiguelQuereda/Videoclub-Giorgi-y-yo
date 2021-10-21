@@ -1,5 +1,5 @@
 <?php
-
+include "CintaVideo.php";
 class Soporte
 {
  const IVA=1.21;
@@ -31,17 +31,16 @@ class Soporte
 
 
     //MÉTODOS
-    public function precioConIva(): float
+    public function getPrecioConIva(): float
     {
         return $this->precio*self::IVA;
     }
 
-    public function muestraResumen(): string
+    public function muestraResumen()
     {
-        $salida = "<p>".$this->titulo;
-        $salida .= $this->precio." (IVA no incluido). </p>";
-        $salida .= "<p>Precio IVA incluido: ".$this->precioConIva()." euros.</p>";
-        return $salida;
+        
+        echo "<i>".$this->titulo."</i><br>";
+        echo $this->precio." (IVA no incluido)<br>";
     }
 
 }
@@ -57,12 +56,24 @@ class Soporte
 </head>
 <body>
 <?php
-$soporte1 = new Soporte("Tenet", 22, 3);
-echo $soporte1->muestraResumen(); 
+$soporte1 = new Soporte("Tenet", 22, 3); 
+echo "<strong>" . $soporte1->titulo . "</strong>"; 
+echo "<br>Precio: " . $soporte1->getPrecio() . " euros"; 
+echo "<br>Precio IVA incluido: " . $soporte1->getPrecioConIVA() . " euros";
+echo "<br>";
+echo $soporte1->muestraResumen();
 
 
-$soporte2 = new CintaVideo("Cazafantasmas", 8, 13, 106);
-echo $soporte2->muestraResumen();
+echo "<br>";
+echo "<br>";
+
+
+$miCinta = new CintaVideo("Los cazafantasmas", 23, 3.5, 107); 
+echo "<strong>" . $miCinta->titulo . "</strong>"; 
+echo "<br>Precio: " . $miCinta->getPrecio() . " euros"; 
+echo "<br>Precio IVA incluido: " . $miCinta->getPrecioConIva() . " euros";
+$miCinta->muestraResumen();
+
 ?>
 </body>
 </html>
