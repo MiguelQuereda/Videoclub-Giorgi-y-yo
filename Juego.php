@@ -44,8 +44,8 @@ class Juego extends Soporte
             } else {
                 $frase = "Para un jugador";
             }
-        }else{
-            $frase = "Para ".$min." a ".$max." jugadores";
+        } else {
+            $frase = "Para " . $min . " a " . $max . " jugadores";
         }
 
         return $frase;
@@ -54,23 +54,6 @@ class Juego extends Soporte
     {
         echo "<br>" . "Película en DVD: " . "<br>";
         echo parent::muestraResumen();
-        echo $this->muestraJugadoresPosibles()."<br>";
+        echo $this->muestraJugadoresPosibles() . "<br>";
     }
 }
-?>
-
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DVD</title>
-</head>
-
-<body>
-
-</body>
-
-</html>
