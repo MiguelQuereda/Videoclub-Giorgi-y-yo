@@ -6,7 +6,7 @@ class Cliente
     private array $soportesAlquilados;
     private int $numSoportesAlquilados;
 
-    function __construct(
+    public function __construct(
         public string $nombre,
         private int $numero,
         private int $maxAlquilerConcurrente = 3
