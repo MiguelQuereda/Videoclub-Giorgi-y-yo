@@ -58,11 +58,11 @@ class Cliente
     public function devolver(int $numSoporte):bool{
         echo "<br>";
         if(sizeof($this->soportesAlquilados) >= $numSoporte){
-            echo "El soporte en la posición ".$numSoporte." ha sido devuelta";
+            echo "- El soporte en la posición ".$numSoporte." ha sido devuelta -";
             unset($this->soportesAlquilados[$numSoporte]);
             return true;
         }{
-            echo "No hay ningún soporte con ese número inscrito en la lista";
+            echo "- Este cliente no tiene alquilado ningún elemento -";
             return false;
         }
     }
