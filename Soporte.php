@@ -1,6 +1,6 @@
 <?php
 
-class Soporte
+abstract class Soporte
 {
     const IVA = 1.21;
 

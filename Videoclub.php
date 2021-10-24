@@ -80,5 +80,10 @@ class VideoClub
     //TODO: Terminar
     public function alquilaSocioProducto($numeroCliente, $numeroSoporte)
     {
+        if ($numeroCliente instanceof Cliente) {
+            $numeroCliente->alquilar($numeroSoporte);
+        } else {
+            echo "Este número no está asociado a ningún cliente";
+        }
     }
 }
