@@ -11,6 +11,7 @@ class Cliente
         private int $numero,
         private int $maxAlquilerConcurrente = 3
     ) {
+        $this->soportesAlquilados=[];
     }
 
 
@@ -36,7 +37,7 @@ class Cliente
 
     public function tieneAlquilado(Soporte $s): bool
     {
-        if (array_count_values($this->soportesAlquilados, $s)) {
+        if (in_array($s,$this->soportesAlquilados)==true) {
             return true;
         } else {
             return false;
@@ -46,17 +47,19 @@ class Cliente
     public function alquilar(Soporte $s): bool
     {
         if ($this->tieneAlquilado($s) == false && $this->getNumSoporteAlquilados() < $this->maxAlquilerConcurrente) {
-            $this->getNumSoporteAlquilados++;
-            echo "El soporte ha sido alquilado a : ".$this->nombre;
+            array_push($this->soportesAlquilados,$s);
+            echo "<br>";
+            echo "<b>Alquilado soporte a :</b> ".$this->nombre;
             return true;
         }
         return false;
     }
 
     public function devolver(int $numSoporte):bool{
-        if(array_count_values($this->soportesAlquilados, $numSoporte)){
-            echo "El soporte con el código ".$numSoporte." ha sido devuelta";
-            $this->getNumSoporteAlquilados--;
+        echo "<br>";
+        if(sizeof($this->soportesAlquilados) >= $numSoporte){
+            echo "El soporte en la posición ".$numSoporte." ha sido devuelta";
+            unset($this->soportesAlquilados[$numSoporte]);
             return true;
         }{
             echo "No hay ningún soporte con ese número inscrito en la lista";
@@ -65,10 +68,12 @@ class Cliente
     }
 
     public function listaAlquileres(): void{
-
+        echo "<br>";
         echo"El usuario tiene: ".$this->getNumSoporteAlquilados()." alquilados";
+        echo "<br>";
         foreach($this->soportesAlquilados as $s){
-            echo $s->mostrarResumen();
+            echo $s->muestraResumen();
+            echo "<br>";
         }
 
     }
