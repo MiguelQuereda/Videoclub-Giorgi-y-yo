@@ -33,25 +33,33 @@ class VideoClub
     //MÉTODOS
     private function incluirProducto(Soporte $s)
     {
-        array_push($this->productos, $s);
+        // array_push($this->productos, $s);
+        $this->productos[$s->getNumero()] = $s;
+        $this->numProductos++;// Nos ha faltado esto
+        
     }
 
     public function incluirCintaVideo($titulo, $precio, $duracion)
     {
         $v = new CintaVideo($titulo, $this->numProductos, $precio, $duracion);
         $this->incluirProducto($v);
+        $this->numProductos++;// Nos ha faltado esto
+
     }
 
     public function incluirDvd($titulo, $precio, $idiomas, $pantalla)
     {
         $d = new DVD($titulo, $this->numProductos, $precio, $idiomas, $pantalla);
         $this->incluirProducto($d);
+        $this->numProductos++;// Nos ha faltado esto
     }
 
     public function incluirJuego($titulo, $precio, $consola, $minJ, $maxJ)
     {
         $j = new Juego($titulo, $this->numProductos, $precio, $consola, $minJ, $maxJ);
         $this->incluirProducto($j);
+        $this->numProductos++;// Nos ha faltado esto
+
     }
 
     public function incluirSocio($nombre, $maxAlquileresConcurrentes = 3)
@@ -59,6 +67,7 @@ class VideoClub
         $soportesAlquilados = [];
         $numSoportesAlquilados = count($soportesAlquilados);
         $s = new Cliente($nombre, $this->numSocios, $soportesAlquilados[], $numSoportesAlquilados, $maxAlquileresConcurrentes);
+        $this->numSocios++;// Nos ha faltado esto
     }
 
     public function listarProductos()
@@ -80,10 +89,10 @@ class VideoClub
     //TODO: Terminar
     public function alquilaSocioProducto($numeroCliente, $numeroSoporte)
     {
-        if ($numeroCliente instanceof Cliente) {
-            $numeroCliente->alquilar($numeroSoporte);
-        } else {
-            echo "Este número no está asociado a ningún cliente";
+        $cliente = $this->socios[$numeroCliente];
+        $soporte = $this->productos[$numeroSoporte];
+        if (isset($cliente) && isset($soporte)) {
+            $cliente->alquilar($soporte);
         }
     }
 }

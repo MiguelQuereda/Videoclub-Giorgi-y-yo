@@ -37,17 +37,18 @@ class Cliente
 
     public function tieneAlquilado(Soporte $s): bool
     {
-        if (in_array($s,$this->soportesAlquilados)==true) {
-            return true;
-        } else {
-            return false;
-        }
+      return isset($this->soportesAlquilados[$s->getNumero()]);
+      // isset devuelve true or false
     }
 
     public function alquilar(Soporte $s): bool
     {
         if ($this->tieneAlquilado($s) == false && $this->getNumSoporteAlquilados() < $this->maxAlquilerConcurrente) {
-            array_push($this->soportesAlquilados,$s);
+            
+            $this->soportesAlquilados[$s->getNumero()]= $s;
+            //array_push($this->soportesAlquilados,$s);
+            // Lo que hacemos es buscar por posición, es más eficiente.
+            // 
             echo "<br>";
             echo "<b>Alquilado soporte a :</b> ".$this->nombre;
             return true;
@@ -57,9 +58,9 @@ class Cliente
 
     public function devolver(int $numSoporte):bool{
         echo "<br>";
-        if(sizeof($this->soportesAlquilados) >= $numSoporte){
-            echo "- El soporte en la posición ".$numSoporte." ha sido devuelta -";
+        if($this->numSoportesAlquilados != 0){
             unset($this->soportesAlquilados[$numSoporte]);
+            echo "- El soporte en la posición ".$numSoporte." ha sido devuelta -";
             return true;
         }{
             echo "- Este cliente no tiene alquilado ningún elemento -";
@@ -77,7 +78,7 @@ class Cliente
         }
 
     }
-    public function muestraResumen()
+    public function muestraResumen() 
     {
         echo "Nombre: " . $this->nombre . "<br>";
         echo "Número de alquileres: " . $this->getNumSoporteAlquilados() . "<br>";
