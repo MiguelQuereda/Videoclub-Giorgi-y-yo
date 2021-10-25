@@ -12,6 +12,7 @@ $vc->incluirDvd("El Imperio Contraataca", 3, "es,en","16:9");
 $vc->incluirCintaVideo("Los cazafantasmas", 3.5, 107); 
 $vc->incluirCintaVideo("El nombre de la Rosa", 1.5, 140); 
 
+$vc->incluirCintaVideo("El nombre de la Rosa", 1.5, 140)->incluirCintaVideo("Los cazafantasmas", 3.5, 107); 
 //listo los productos 
 $vc->listarProductos(); 
 

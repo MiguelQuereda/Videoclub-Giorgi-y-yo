@@ -44,6 +44,7 @@ class VideoClub
         $v = new CintaVideo($titulo, $this->numProductos, $precio, $duracion);
         $this->incluirProducto($v);
         $this->numProductos++;// Nos ha faltado esto
+        return $this;
 
     }
 
@@ -52,6 +53,7 @@ class VideoClub
         $d = new DVD($titulo, $this->numProductos, $precio, $idiomas, $pantalla);
         $this->incluirProducto($d);
         $this->numProductos++;// Nos ha faltado esto
+        return $this;
     }
 
     public function incluirJuego($titulo, $precio, $consola, $minJ, $maxJ)
@@ -59,6 +61,7 @@ class VideoClub
         $j = new Juego($titulo, $this->numProductos, $precio, $consola, $minJ, $maxJ);
         $this->incluirProducto($j);
         $this->numProductos++;// Nos ha faltado esto
+        return $this;
 
     }
 
@@ -68,6 +71,8 @@ class VideoClub
         $numSoportesAlquilados = count($soportesAlquilados);
         $s = new Cliente($nombre, $this->numSocios, $soportesAlquilados[], $numSoportesAlquilados, $maxAlquileresConcurrentes);
         $this->numSocios++;// Nos ha faltado esto
+        return $this;
+
     }
 
     public function listarProductos()

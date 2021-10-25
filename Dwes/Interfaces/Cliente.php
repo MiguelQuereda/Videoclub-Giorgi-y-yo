@@ -16,9 +16,10 @@ class Cliente
 
 
     //SETTER
-    public function setNumero(int $num)
+    public function setNumero(int $num) : Cliente
     {
-        return $this->numero = $num;
+        $this->numero = $num;
+        return $this;
     }
 
 
@@ -41,7 +42,7 @@ class Cliente
       // isset devuelve true or false
     }
 
-    public function alquilar(Soporte $s): bool
+    public function alquilar(Soporte $s)
     {
         if ($this->tieneAlquilado($s) == false && $this->getNumSoporteAlquilados() < $this->maxAlquilerConcurrente) {
             
@@ -51,9 +52,12 @@ class Cliente
             // 
             echo "<br>";
             echo "<b>Alquilado soporte a :</b> ".$this->nombre;
-            return true;
+            //return true;
+
         }
-        return false;
+        //return false;
+        return $this;
+
     }
 
     public function devolver(int $numSoporte):bool{
@@ -66,6 +70,7 @@ class Cliente
             echo "- Este cliente no tiene alquilado ningún elemento -";
             return false;
         }
+        return $this;
     }
 
     public function listaAlquileres(): void{

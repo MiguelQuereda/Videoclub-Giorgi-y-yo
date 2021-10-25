@@ -19,20 +19,6 @@ include_once "Juego.php";
 
 <body>
     <?php
-/*
-    $soporte1 = new Soporte("Tenet", 22, 3);
-    echo "<strong>" . $soporte1->titulo . "</strong>";
-    echo "<br>Precio: " . $soporte1->getPrecio() . " euros";
-    echo "<br>Precio IVA incluido: " . $soporte1->getPrecioConIVA() . " euros";
-    echo "<br>";
-    echo $soporte1->muestraResumen();
-
-    ESTO YA NO FUNCIONA PORQUE HEMOS HECHO LA CLASE ABSTRACTA
-
-    echo "<br>";
-    echo "<br>";
-*/
-
     $miCinta = new CintaVideo("Los cazafantasmas", 23, 3.5, 107);
     echo "<strong>" . $miCinta->titulo . "</strong>";
     echo "<br>Precio: " . $miCinta->getPrecio() . " euros";
