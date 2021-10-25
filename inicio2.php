@@ -1,8 +1,9 @@
 <?php
-include_once "CintaVideo.php";
-include_once "Dvd.php";
-include_once "Juego.php";
-include_once "Cliente.php";
+declare( strict_types = 1 );
+include_once "Dwes\ProyectoVideoclub\CintaVideo.php";
+include_once "Dwes\ProyectoVideoclub\Dvd.php";
+include_once "Dwes\ProyectoVideoclub\Juego.php";
+include_once "Dwes\ProyectoVideoclub\Cliente.php";
 
 use \Dwes\ProyectoVideoclub\Soporte;
 use \Dwes\ProyectoVideoclub\CintaVideo;

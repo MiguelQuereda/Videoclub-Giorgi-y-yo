@@ -1,4 +1,5 @@
 <?php
+declare( strict_types = 1 );
 namespace Dwes\ProyectoVideoclub;
 include_once("Resumible.php");
 
