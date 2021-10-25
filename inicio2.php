@@ -1,10 +1,6 @@
 <?php
 declare( strict_types = 1 );
-include_once "Dwes\ProyectoVideoclub\CintaVideo.php";
-include_once "Dwes\ProyectoVideoclub\Dvd.php";
-include_once "Dwes\ProyectoVideoclub\Juego.php";
-include_once "Dwes\ProyectoVideoclub\Cliente.php";
-
+include_once("autoload.php");
 use \Dwes\ProyectoVideoclub\Soporte;
 use \Dwes\ProyectoVideoclub\CintaVideo;
 use \Dwes\ProyectoVideoclub\DVD;

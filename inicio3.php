@@ -1,6 +1,6 @@
 <?php
 declare( strict_types = 1 );
-include_once "Dwes\ProyectoVideoclub\Videoclub.php"; // No incluimos nada más
+include_once("autoload.php");
 use \Dwes\ProyectoVideoclub\VideoClub;
 $vc = new Videoclub("Severo 8A"); 
 
