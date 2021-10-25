@@ -1,6 +1,6 @@
 <?php
 include_once "Videoclub.php"; // No incluimos nada más
-
+use \Dwes\ProyectoVideoclub\VideoClub;
 $vc = new Videoclub("Severo 8A"); 
 
 //voy a incluir unos cuantos soportes de prueba 
@@ -11,7 +11,7 @@ $vc->incluirDvd("Origen", 4.5, "es,en,fr", "16:9");
 $vc->incluirDvd("El Imperio Contraataca", 3, "es,en","16:9"); 
 $vc->incluirCintaVideo("Los cazafantasmas", 3.5, 107); 
 $vc->incluirCintaVideo("El nombre de la Rosa", 1.5, 140); 
-
+// Aquí lo que hacemos es hacer 2 acciones en la misma línea. Esto solo funciona si es de la misma clase y todas las funciones devuelven $this;
 $vc->incluirCintaVideo("El nombre de la Rosa", 1.5, 140)->incluirCintaVideo("Los cazafantasmas", 3.5, 107); 
 //listo los productos 
 $vc->listarProductos(); 

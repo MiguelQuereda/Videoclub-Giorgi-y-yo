@@ -1,4 +1,6 @@
 <?php
+namespace Dwes\ProyectoVideoclub;
+
 interface Resumible
 {
     // EJERCICIO 329. HACER UNA INTERFAZ QUE IMPLEMENTE MUESTRA RESUMEN
