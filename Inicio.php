@@ -5,6 +5,7 @@ include_once "Dvd.php";
 include_once "CintaVideo.php";
 include_once "Juego.php";
 
+use \Dwes\ProyectoVideoclub\Soporte;
 ?>
 
 <!DOCTYPE html>
