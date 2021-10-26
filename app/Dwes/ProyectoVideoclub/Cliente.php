@@ -1,6 +1,9 @@
 <?php
 declare( strict_types = 1 );
 namespace Dwes\ProyectoVideoclub;
+
+use Dwes\ProyectoVideoclub\Util\VideoclubException;
+
 include_once "Soporte.php";
 
 class Cliente
@@ -47,8 +50,9 @@ class Cliente
     public function alquilar(Soporte $s)
     {
         if ($this->tieneAlquilado($s) == false && $this->getNumSoporteAlquilados() < $this->maxAlquilerConcurrente) {
-            
             $this->soportesAlquilados[$s->getNumero()]= $s;
+
+
             //array_push($this->soportesAlquilados,$s);
             // Lo que hacemos es buscar por posición, es más eficiente.
             // 
@@ -57,20 +61,32 @@ class Cliente
             //return true;
 
         }
-        //return false;
+        else{
+            if($this->tieneAlquilado($s) == true && $this->getNumSoporteAlquilados() >= $this->maxAlquilerConcurrente){
+                throw new \CupoSuperadoException("No puede alquilar, por favor, devuelva algún soporte alquilado.");
+                throw new \SoporteYaAlqiuladoException("Ya tiene alquilado el soporte ".$s);
+            }
+            else if($this->getNumSoporteAlquilados() >= $this->maxAlquilerConcurrente){
+                throw new \CupoSuperadoException("No puede alquilar, por favor, devuelva algún soporte.");
+            }
+            else if($this->tieneAlquilado($s)){
+                throw new \SoporteYaAlqiuladoException("Ya tiene alquilado el soporte ".$s);
+            }
+        }
         return $this;
 
     }
 
-    public function devolver(int $numSoporte):bool{
+    public function devolver(int $numSoporte){
         echo "<br>";
         if($this->numSoportesAlquilados != 0){
             unset($this->soportesAlquilados[$numSoporte]);
             echo "- El soporte en la posición ".$numSoporte." ha sido devuelta -";
-            return true;
+            //return true;
         }{
+            throw new \SoporteNoEncontradoException("El soporte ".$numSoporte." no existe");
             echo "- Este cliente no tiene alquilado ningún elemento -";
-            return false;
+            //return false;
         }
         return $this;
     }
