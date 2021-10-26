@@ -37,7 +37,7 @@ class VideoClub
     {
         return count($this->productos);
     }
-    
+
     public function getNumSocios(): int
     {
         return count($this->socios);
@@ -130,25 +130,25 @@ class VideoClub
     public function alquilaSocioProductos(int $numSocio, array $numerosProducto)
     {
         $socio = $this->socios[$numSocio];
-        if(!isset($socio)){
-            // throw new exception "Este socio esta muy muerto (no existe el socio)."
+        if (!isset($socio)) {
+            // throw new SocioNoExiste "Este socio esta muy muerto (no existe el socio)."
         }
-        foreach($numerosProducto as $n){// Comprobar si estan alquilados
+        $check = true;
+        foreach ($numerosProducto as $n) { // Comprobar si estan alquilados
             $soporte = $this->productos[$n];
-            $check = true;
-            if(!$soporte->alquilado == false){
+            if (!$soporte->alquilado == false) {
                 $check = false;
             }
         }
-        if($check == true){
-        foreach($numerosProducto as $n){
-            $soporte = $this->productos[$n];
-            if(isset($soporte)){
-                $socio->alquilar($soporte);
-                $soporte->alquilado = true;
+        if ($check == true) {
+            foreach ($numerosProducto as $n) {// Metemos los elementos en el array
+                $soporte = $this->productos[$n];
+                if (isset($soporte)) {
+                    $socio->alquilar($soporte);
+                    $soporte->alquilado = true;
+                }
             }
         }
-    }
 
         //$soporte = $this->productos[$numeroSoporte];
     }
