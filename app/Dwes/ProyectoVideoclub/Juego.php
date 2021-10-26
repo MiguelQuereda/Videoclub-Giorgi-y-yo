@@ -1,8 +1,7 @@
 <?php
 declare( strict_types = 1 );
 namespace Dwes\ProyectoVideoclub;
-include_once("autoload.php");
-//include_once "Soporte.php";
+include_once "Soporte.php";
 
 class Juego extends Soporte
 {

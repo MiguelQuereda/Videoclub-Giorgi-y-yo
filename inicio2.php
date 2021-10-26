@@ -1,11 +1,11 @@
 <?php
 declare( strict_types = 1 );
 include_once("autoload.php");
-use \Dwes\ProyectoVideoclub\Soporte;
-use \Dwes\ProyectoVideoclub\CintaVideo;
-use \Dwes\ProyectoVideoclub\DVD;
-use \Dwes\ProyectoVideoclub\Juego;
-use \Dwes\ProyectoVideoclub\Cliente;
+use Dwes\ProyectoVideoclub\Cliente;
+use Dwes\ProyectoVideoclub\Soporte;
+use Dwes\ProyectoVideoclub\CintaVideo;
+use Dwes\ProyectoVideoclub\Juego;
+use Dwes\ProyectoVideoclub\DVD;
 
 //instanciamos un par de objetos cliente
 $cliente1 = new Cliente("Bruce Wayne", 23);
@@ -15,7 +15,7 @@ $cliente2 = new Cliente("Clark Kent", 33);
 echo "<br>El identificador del cliente 1 es: " . $cliente1->getNumero();
 echo "<br>El identificador del cliente 2 es: " . $cliente2->getNumero();
 
-//instancio algunos soportes 
+//instancio algunos DVDs 
 $soporte1 = new CintaVideo("Los cazafantasmas", 23, 3.5, 107);
 $soporte2 = new Juego("The Last of Us Part II", 26, 49.99, "PS4", 1, 1);  
 $soporte3 = new Dvd("Origen", 24, 15, "es,en,fr", "16:9");

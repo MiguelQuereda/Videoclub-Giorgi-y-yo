@@ -1,10 +1,8 @@
 <?php
 declare( strict_types = 1 );
 namespace Dwes\ProyectoVideoclub;
-include_once("autoload.php");
-
-//include_once("Resumible.php");
-
+//include_once("Resumible.php"); esto va solo en las páginas de pruebas
+// En las clases solo incluimoms el name Space, nos ahorra los include y use
 
 abstract class Soporte implements Resumible
 {

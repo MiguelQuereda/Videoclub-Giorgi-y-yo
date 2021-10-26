@@ -1,7 +1,13 @@
 <?php
 declare( strict_types = 1 );
+//Como no estamos en el mismo directorio, nos hará falta utizilizar los include y los use
+
 include_once("autoload.php");
-use \Dwes\ProyectoVideoclub\Soporte;
+use Dwes\ProyectoVideoclub\Soporte;
+use Dwes\ProyectoVideoclub\CintaVideo;
+use Dwes\ProyectoVideoclub\Juego;
+use Dwes\ProyectoVideoclub\DVD;
+
 ?>
 
 <!DOCTYPE html>

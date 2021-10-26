@@ -1,6 +1,9 @@
 <?php
 spl_autoload_register(function ($nombreClase) {
-    include_once "app/" . $nombreClase . '.php';
+    $ruta= "app\\" . $nombreClase . '.php';
+    // Sustituimos las ramas
+    $ruta = str_replace("\\","/",$ruta);
+    include_once ($ruta);
 });
 
 
