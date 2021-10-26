@@ -4,7 +4,7 @@ namespace Dwes\ProyectoVideoclub;
 
 use Dwes\ProyectoVideoclub\Util\CupoSuperadoException;
 use Dwes\ProyectoVideoclub\Util\SoporteNoEncontradoException;
-use Dwes\ProyectoVideoclub\Util\SoporteYaAlqiuladoException;
+use Dwes\ProyectoVideoclub\Util\SoporteYaAlquiladoException;
 use Dwes\ProyectoVideoclub\Util\VideoclubException;
 
 include_once "Soporte.php";
@@ -61,22 +61,38 @@ class Cliente
             // 
             echo "<br>";
             echo "<b>Alquilado soporte a :</b> ".$this->nombre;
+            $s->alquilado = true;
             //return true;
 
         }
         else{
             if($this->tieneAlquilado($s) == true && $this->getNumSoporteAlquilados() >= $this->maxAlquilerConcurrente){
                 throw new CupoSuperadoException("No puede alquilar, por favor, devuelva algún soporte alquilado.");
-                throw new SoporteYaAlqiuladoException("Ya tiene alquilado el soporte ".$s);
+                throw new SoporteYaAlquiladoException("Ya tiene alquilado el soporte ".$s);
             }
-            else if($this->getNumSoporteAlquilados() >= $this->maxAlquilerConcurrente){
-                throw new CupoSuperadoException("No puede alquilar, por favor, devuelva algún soporte.");
+            else if(count($this->soportesAlquilados) >= $this->maxAlquilerConcurrente){
+                throw new CupoSuperadoException("No puede alquilar, por favor, devuelva algún soporte. Num de alquieres: ");
             }
             else if($this->tieneAlquilado($s)){
-                throw new SoporteYaAlqiuladoException("Ya tiene alquilado el soporte ".$s);
+                throw new SoporteYaAlquiladoException("Ya tiene alquilado el soporte ".$s->titulo);
             }
         }
         return $this;
+
+    }
+
+    public function alquilar2(Soporte $s)
+    {
+        if(!$this->tieneAlquilado($s)){
+            throw new SoporteYaAlquiladoException("El cliente ya tiene alquilado el soporte ".$s->titulo);
+        }
+        if($this->numSoportesAlquilados >= $this->maxAlquilerConcurrente){
+            throw new CupoSuperadoException("Este cliente tiene ".$this->numSoportesAlquilados);
+        }
+
+        $this->soportesAlquilados[$s->getNumero()]= $s;
+        $this->numSoportesAlquilados++;
+        echo"Alquilado soporte a ".$this->nombre;
 
     }
 
@@ -85,7 +101,8 @@ class Cliente
         if(count($this->soportesAlquilados) != 0){
             unset($this->soportesAlquilados[$numSoporte]);
             echo "- El soporte en la posición ".$numSoporte." ha sido devuelta -";
-            //return true;
+            //De esta forma, decimos que el Soporte con el num = numSoporte, le alteramos la propiedad alquilar
+            $this->soportesAlquilados[$numSoporte]->alquilar = false;
         }
         else{
             throw new SoporteNoEncontradoException("El soporte ".$numSoporte." no existe");

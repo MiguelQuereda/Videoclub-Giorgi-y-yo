@@ -6,9 +6,8 @@ namespace Dwes\ProyectoVideoclub;
 
 use CupoSuperadoException;
 use Dwes\ProyectoVideoclub\Util\CupoSuperadoException as UtilCupoSuperadoException;
-use Dwes\ProyectoVideoclub\Util\SoporteYaAlqiuladoException as UtilSoporteYaAlqiuladoException;
+use Dwes\ProyectoVideoclub\Util\SoporteYaAlquiladoException as UtilSoporteYaAlquiladoException;
 use Dwes\ProyectoVideoclub\Util\VideoclubException;
-use SoporteYaAlqiuladoException;
 
 //include_once("autoload.php");
 
@@ -21,10 +20,13 @@ class VideoClub
     private int $numSocios;
     private array $productos;
     private array $socios;
+    public int $numProductosAlquilados;
+    public int $numTotalAlquileres;
 
     //CONSTRUCTOR
     public function __construct(
-        private string $nombre
+        private string $nombre,
+
     ) {
         $this->productos = [];
         $this->socios = [];
@@ -35,12 +37,21 @@ class VideoClub
     {
         return count($this->productos);
     }
-
+    
     public function getNumSocios(): int
     {
         return count($this->socios);
     }
 
+    public function getNumProductosAlquilados(): int
+    {
+        return $this->numProductosAlquilados;
+    }
+
+    public function getNumTotalAlquileres(): int
+    {
+        return $this->numTotalAlquileres;
+    }
 
     //MÉTODOS
     private function incluirProducto(Soporte $s)
@@ -109,8 +120,36 @@ class VideoClub
             if (isset($cliente) && isset($soporte)) {
                 $cliente->alquilar($soporte);
             }
-        } catch (UtilCupoSuperadoException | UtilSoporteYaAlqiuladoException $e) {
-            throw new VideoclubException($e->getMessage());
+        } catch (UtilCupoSuperadoException $e) {
+            echo "UtilCupoSuperadoException" . ($e->getMessage());
+        } catch (UtilSoporteYaAlquiladoException $e) {
+            echo "UtilSoporteYaAlquiladoException" . ($e->getMessage());
         }
+    }
+
+    public function alquilaSocioProductos(int $numSocio, array $numerosProducto)
+    {
+        $socio = $this->socios[$numSocio];
+        if(!isset($socio)){
+            // throw new exception "Este socio esta muy muerto (no existe el socio)."
+        }
+        foreach($numerosProducto as $n){// Comprobar si estan alquilados
+            $soporte = $this->productos[$n];
+            $check = true;
+            if(!$soporte->alquilado == false){
+                $check = false;
+            }
+        }
+        if($check == true){
+        foreach($numerosProducto as $n){
+            $soporte = $this->productos[$n];
+            if(isset($soporte)){
+                $socio->alquilar($soporte);
+                $soporte->alquilado = true;
+            }
+        }
+    }
+
+        //$soporte = $this->productos[$numeroSoporte];
     }
 }
