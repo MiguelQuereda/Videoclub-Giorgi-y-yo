@@ -1,6 +1,5 @@
 <?php
-
-use Dwes\ProyectoVideoclub\Util\VideoclubException;
+namespace Dwes\ProyectoVideoclub\Util;
 
 class SoporteNoEncontradoException extends VideoclubException
 {

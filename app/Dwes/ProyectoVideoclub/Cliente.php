@@ -2,6 +2,9 @@
 declare( strict_types = 1 );
 namespace Dwes\ProyectoVideoclub;
 
+use Dwes\ProyectoVideoclub\Util\CupoSuperadoException;
+use Dwes\ProyectoVideoclub\Util\SoporteNoEncontradoException;
+use Dwes\ProyectoVideoclub\Util\SoporteYaAlqiuladoException;
 use Dwes\ProyectoVideoclub\Util\VideoclubException;
 
 include_once "Soporte.php";
@@ -63,14 +66,14 @@ class Cliente
         }
         else{
             if($this->tieneAlquilado($s) == true && $this->getNumSoporteAlquilados() >= $this->maxAlquilerConcurrente){
-                throw new \CupoSuperadoException("No puede alquilar, por favor, devuelva algún soporte alquilado.");
-                throw new \SoporteYaAlqiuladoException("Ya tiene alquilado el soporte ".$s);
+                throw new CupoSuperadoException("No puede alquilar, por favor, devuelva algún soporte alquilado.");
+                throw new SoporteYaAlqiuladoException("Ya tiene alquilado el soporte ".$s);
             }
             else if($this->getNumSoporteAlquilados() >= $this->maxAlquilerConcurrente){
-                throw new \CupoSuperadoException("No puede alquilar, por favor, devuelva algún soporte.");
+                throw new CupoSuperadoException("No puede alquilar, por favor, devuelva algún soporte.");
             }
             else if($this->tieneAlquilado($s)){
-                throw new \SoporteYaAlqiuladoException("Ya tiene alquilado el soporte ".$s);
+                throw new SoporteYaAlqiuladoException("Ya tiene alquilado el soporte ".$s);
             }
         }
         return $this;
@@ -79,12 +82,13 @@ class Cliente
 
     public function devolver(int $numSoporte){
         echo "<br>";
-        if($this->numSoportesAlquilados != 0){
+        if(count($this->soportesAlquilados) != 0){
             unset($this->soportesAlquilados[$numSoporte]);
             echo "- El soporte en la posición ".$numSoporte." ha sido devuelta -";
             //return true;
-        }{
-            throw new \SoporteNoEncontradoException("El soporte ".$numSoporte." no existe");
+        }
+        else{
+            throw new SoporteNoEncontradoException("El soporte ".$numSoporte." no existe");
             echo "- Este cliente no tiene alquilado ningún elemento -";
             //return false;
         }

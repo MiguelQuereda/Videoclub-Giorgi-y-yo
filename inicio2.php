@@ -29,17 +29,17 @@ $cliente1->alquilar($soporte3);
 */
 //$cliente1->alquilar($soporte1)->alquilar($soporte2);
 //voy a intentar alquilar de nuevo un soporte que ya tiene alquilado
-$cliente1->alquilar($soporte1);
+$cliente1->alquilar($soporte1)->alquilar($soporte2)->alquilar($soporte3);
 //el cliente tiene 3 soportes en alquiler como máximo
 //este soporte no lo va a poder alquilar
 $cliente1->alquilar($soporte4);
 //este soporte no lo tiene alquilado
-$cliente1->devolver(4);
+//$cliente1->devolver(4);
 //devuelvo un soporte que sí que tiene alquilado
 $cliente1->devolver(2);
 //alquilo otro soporte
-$cliente1->alquilar($soporte4);
+//$cliente1->alquilar($soporte4);
 //listo los elementos alquilados
 $cliente1->listaAlquileres();
 //este cliente no tiene alquileres
-$cliente2->devolver(2);
+//$cliente2->devolver(2);

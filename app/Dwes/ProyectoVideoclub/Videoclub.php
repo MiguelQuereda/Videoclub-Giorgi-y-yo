@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Dwes\ProyectoVideoclub;
 
 use CupoSuperadoException;
+use Dwes\ProyectoVideoclub\Util\CupoSuperadoException as UtilCupoSuperadoException;
+use Dwes\ProyectoVideoclub\Util\SoporteYaAlqiuladoException as UtilSoporteYaAlqiuladoException;
 use Dwes\ProyectoVideoclub\Util\VideoclubException;
 use SoporteYaAlqiuladoException;
 
@@ -107,7 +109,7 @@ class VideoClub
             if (isset($cliente) && isset($soporte)) {
                 $cliente->alquilar($soporte);
             }
-        } catch (CupoSuperadoException | SoporteYaAlqiuladoException $e) {
+        } catch (UtilCupoSuperadoException | UtilSoporteYaAlqiuladoException $e) {
             throw new VideoclubException($e->getMessage());
         }
     }
