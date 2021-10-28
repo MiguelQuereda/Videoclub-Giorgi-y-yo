@@ -98,6 +98,10 @@ class Cliente
 
     public function devolver(int $numSoporte){
         echo "<br>";
+        if(!isset($this->soportesAlquilados[$numSoporte])){
+            throw new SoporteNoEncontradoException("El soporte ".$numSoporte." no existe");
+
+        }
         if(count($this->soportesAlquilados) != 0){
             unset($this->soportesAlquilados[$numSoporte]);
             echo "- El soporte en la posición ".$numSoporte." ha sido devuelta -";

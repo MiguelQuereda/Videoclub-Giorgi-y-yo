@@ -7,7 +7,9 @@ use Dwes\ProyectoVideoclub\Soporte;
 use Dwes\ProyectoVideoclub\CintaVideo;
 use Dwes\ProyectoVideoclub\Juego;
 use Dwes\ProyectoVideoclub\DVD;
+use Dwes\ProyectoVideoclub\Util\VideoclubException;
 
+try {
 $vc = new Videoclub("Severo 8A"); 
 
 //voy a incluir unos cuantos soportes de prueba 
@@ -38,3 +40,6 @@ $vc->alquilaSocioProducto(1,6);
 
 //listo los socios 
 $vc->listarSocios();
+} catch (VideoclubException $e){
+    echo"Se ha producido un error: ".$e->getMessage();
+}

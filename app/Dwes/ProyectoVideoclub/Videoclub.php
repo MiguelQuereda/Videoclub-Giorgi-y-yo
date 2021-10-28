@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Dwes\ProyectoVideoclub;
 
-use CupoSuperadoException;
-use Dwes\ProyectoVideoclub\Util\CupoSuperadoException as UtilCupoSuperadoException;
-use Dwes\ProyectoVideoclub\Util\SoporteYaAlquiladoException as UtilSoporteYaAlquiladoException;
-use Dwes\ProyectoVideoclub\Util\VideoclubException;
+use Dwes\ProyectoVideoclub\Util\CupoSuperadoException;
+use Dwes\ProyectoVideoclub\Util\SoporteNoEncontradoException;
+use Dwes\ProyectoVideoclub\Util\SoporteYaAlquiladoException;
 
 //include_once("autoload.php");
 
@@ -30,6 +29,8 @@ class VideoClub
     ) {
         $this->productos = [];
         $this->socios = [];
+        $this->numProductos = 0;
+        $this->numSocios = 0;
     }
 
     //GETTERS
@@ -66,7 +67,6 @@ class VideoClub
     {
         $v = new CintaVideo($titulo, $this->numProductos, $precio, $duracion);
         $this->incluirProducto($v);
-        $this->numProductos++; // Nos ha faltado esto
         return $this;
     }
 
@@ -74,23 +74,19 @@ class VideoClub
     {
         $d = new DVD($titulo, $this->numProductos, $precio, $idiomas, $pantalla);
         $this->incluirProducto($d);
-        $this->numProductos++; // Nos ha faltado esto
         return $this;
     }
 
     public function incluirJuego($titulo, $precio, $consola, $minJ, $maxJ)
     {
-        $j = new Juego($titulo, $this->numProductos, $precio, $consola, $minJ, $maxJ);
+        $j = new Juego($titulo, count($this->productos), $precio, $consola, $minJ, $maxJ);
         $this->incluirProducto($j);
-        $this->numProductos++; // Nos ha faltado esto
         return $this;
     }
 
     public function incluirSocio($nombre, $maxAlquileresConcurrentes = 3)
     {
-        $soportesAlquilados = [];
-        $numSoportesAlquilados = count($soportesAlquilados);
-        $s = new Cliente($nombre, $this->numSocios, $soportesAlquilados[], $numSoportesAlquilados, $maxAlquileresConcurrentes);
+        $s = new Cliente($nombre, count($this->socios), $maxAlquileresConcurrentes);
         $this->numSocios++; // Nos ha faltado esto
         return $this;
     }
@@ -117,13 +113,19 @@ class VideoClub
         $cliente = $this->socios[$numeroCliente];
         $soporte = $this->productos[$numeroSoporte];
         try {
-            if (isset($cliente) && isset($soporte)) {
+            if (!isset($cliente)){
+                // Crear esta excepción: throw new ClienteNoEncontradoException("Cliente no enctonrado al realizar el alquiler");
+
+            } else if(!isset($soporte)) {
+                // Crear esta excepción: throw new SoporteNoExiste("Cliente no enctonrado al realizar el alquiler");
+
+            }else{
                 $cliente->alquilar($soporte);
             }
-        } catch (UtilCupoSuperadoException $e) {
-            echo "UtilCupoSuperadoException" . ($e->getMessage());
-        } catch (UtilSoporteYaAlquiladoException $e) {
-            echo "UtilSoporteYaAlquiladoException" . ($e->getMessage());
+        } catch (CupoSuperadoException $e) {
+            echo "¡Error!" . ($e->getMessage());
+        } catch (SoporteYaAlquiladoException $e) {
+            echo "¡Error!" . ($e->getMessage());
         }
     }
 
@@ -136,17 +138,20 @@ class VideoClub
         $check = true;
         foreach ($numerosProducto as $n) { // Comprobar si estan alquilados
             $soporte = $this->productos[$n];
+            if (isset($soporte)) {
+                throw new SoporteNoEncontradoException("El soporte $n no existe");
+            }
             if (!$soporte->alquilado == false) {
                 $check = false;
             }
         }
+
+        // Todos los soportes están disponibles
         if ($check == true) {
             foreach ($numerosProducto as $n) {// Metemos los elementos en el array
                 $soporte = $this->productos[$n];
-                if (isset($soporte)) {
                     $socio->alquilar($soporte);
                     $soporte->alquilado = true;
-                }
             }
         }
 
