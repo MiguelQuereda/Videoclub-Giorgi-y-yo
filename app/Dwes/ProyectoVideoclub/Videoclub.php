@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Dwes\ProyectoVideoclub;
 
+use Dwes\ProyectoVideoclub\Util\ClienteNoEncontradoException;
 use Dwes\ProyectoVideoclub\Util\CupoSuperadoException;
 use Dwes\ProyectoVideoclub\Util\SoporteNoEncontradoException;
 use Dwes\ProyectoVideoclub\Util\SoporteYaAlquiladoException;
@@ -107,19 +108,16 @@ class VideoClub
         }
     }
 
-    //TODO: Terminar
     public function alquilaSocioProducto($numeroCliente, $numeroSoporte)
     {
         $cliente = $this->socios[$numeroCliente];
         $soporte = $this->productos[$numeroSoporte];
         try {
-            if (!isset($cliente)){
-                // Crear esta excepción: throw new ClienteNoEncontradoException("Cliente no enctonrado al realizar el alquiler");
-
-            } else if(!isset($soporte)) {
-                // Crear esta excepción: throw new SoporteNoExiste("Cliente no enctonrado al realizar el alquiler");
-
-            }else{
+            if (!isset($cliente)) {
+                throw new ClienteNoEncontradoException("Cliente no enctonrado al realizar el alquiler");
+            } else if (!isset($soporte)) {
+                throw new SoporteNoEncontradoException("Cliente no enctonrado al realizar el alquiler");
+            } else {
                 $cliente->alquilar($soporte);
             }
         } catch (CupoSuperadoException $e) {
@@ -133,12 +131,19 @@ class VideoClub
     {
         $socio = $this->socios[$numSocio];
         if (!isset($socio)) {
-            // throw new SocioNoExiste "Este socio esta muy muerto (no existe el socio)."
+            throw new ClienteNoEncontradoException("Este socio esta muy muerto (no existe el socio.");
         }
+
+        //Comprobar si no excede el límite de alquileres
+        $totalAlquileres = count($numerosProducto);
+        if ($socio->maxAlquilerConcurrente < ($socio->numSoportesAlquilados + $totalAlquileres)) {
+            throw new CupoSuperadoException("Se ha excedido el límite de alquileres, por favor, devuelva algun soporte.");
+        }
+
         $check = true;
         foreach ($numerosProducto as $n) { // Comprobar si estan alquilados
             $soporte = $this->productos[$n];
-            if (isset($soporte)) {
+            if (!isset($soporte)) {
                 throw new SoporteNoEncontradoException("El soporte $n no existe");
             }
             if (!$soporte->alquilado == false) {
@@ -148,13 +153,48 @@ class VideoClub
 
         // Todos los soportes están disponibles
         if ($check == true) {
-            foreach ($numerosProducto as $n) {// Metemos los elementos en el array
+            foreach ($numerosProducto as $n) { // Metemos los elementos en el array
                 $soporte = $this->productos[$n];
-                    $socio->alquilar($soporte);
-                    $soporte->alquilado = true;
+                $socio->alquilar($soporte);
+                $soporte->alquilado = true;
+                $socio->numSoportesAlquilados++;
             }
         }
 
         //$soporte = $this->productos[$numeroSoporte];
+    }
+
+    public function devolverSocioProducto(int $numSocio, int $numerosProducto)
+    {
+        $socio = $this->socios[$numSocio]; // Llamamos al socio
+        $producto = $this->productos[$numerosProducto]; // Llamamos al producto
+
+        if (!isset($socio)) {
+            throw new ClienteNoEncontradoException("El cliente $socio no existe");
+        }
+        if (!isset($producto)) {
+            throw new SoporteNoEncontradoException("El soporte $producto no existe");
+        }
+
+        if ($socio->tieneAlquilado($producto)) {
+            $socio->devolver($producto);
+            $producto->alquilado = false;
+            $socio->numSoportesAlquilados--;
+        } else {
+            echo "El socio $socio no tiene $producto alquilado";
+        }
+    }
+
+    public function devolverSocioProductos(int $numSocio, array $numerosProductos)
+    {
+        $socio = $this->socios[$numSocio]; // Llamamos al socio
+        foreach ($numerosProductos as $producto) { // Desglosamos el array
+            $producto = $this->productos[$producto]; // Identificamos el producto
+            if (!isset($producto)) { // Comprobamos si no existe
+                throw new SoporteNoEncontradoException("El soporte $producto no existe");
+            } else { // devolvemos
+                $socio->devolverSocioProducto($producto);
+            }
+        }
     }
 }
