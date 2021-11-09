@@ -88,6 +88,7 @@ class VideoClub
     public function incluirSocio($nombre, $maxAlquileresConcurrentes = 3)
     {
         $s = new Cliente($nombre, count($this->socios), $maxAlquileresConcurrentes);
+        $this->socios[$s->getNumero()] = $s;
         $this->numSocios++; // Nos ha faltado esto
         return $this;
     }
@@ -116,7 +117,7 @@ class VideoClub
             if (!isset($cliente)) {
                 throw new ClienteNoEncontradoException("Cliente no enctonrado al realizar el alquiler");
             } else if (!isset($soporte)) {
-                throw new SoporteNoEncontradoException("Cliente no enctonrado al realizar el alquiler");
+                throw new SoporteNoEncontradoException("Soporte no enctonrado al realizar el alquiler");
             } else {
                 $cliente->alquilar($soporte);
             }

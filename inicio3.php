@@ -2,11 +2,6 @@
 declare( strict_types = 1 );
 include_once("autoload.php");
 use \Dwes\ProyectoVideoclub\VideoClub;
-use Dwes\ProyectoVideoclub\Cliente;
-use Dwes\ProyectoVideoclub\Soporte;
-use Dwes\ProyectoVideoclub\CintaVideo;
-use Dwes\ProyectoVideoclub\Juego;
-use Dwes\ProyectoVideoclub\DVD;
 use Dwes\ProyectoVideoclub\Util\VideoclubException;
 
 try {
