@@ -1,16 +1,16 @@
 <?php 
-$arrayUsuarios = [["usuario" => "Jorge", "contrasenya" => "Ponze"], ["usuario" => "Juan", "contrasenya" => "Palomo"]];
+$arrayUsuarios = [["Jorge" => "Ponze"], ["Juan" => "Palomo"]];
 $usuario = "Jorge";
 $contrasenya = "Ponze";
+//print_r($arrayUsuarios[0][$usuario]);
 
 if (isset($arrayUsuarios,$usuario)){
-    echo "Ha encontrado el usuario";
-    $a = $arrayUsuarios[$usuario]["contrasenya"];
-    echo $a;
-
-    /*if ($arrayUsuarios[$usuario][$contrasenya] == $contrasenya) {
+    $posicion = array_search($usuario,$arrayUsuarios);
+    echo "Ha encontrado el usuario <br>";
+    $password = $arrayUsuarios[$posicion][$usuario];
+    if ( $password == $contrasenya) {
         echo "Todo bien";
-    }else { echo "No ha asociado bien el usuario y la contraseña";}*/
+    }else { echo "No ha asociado bien el usuario y la contraseña";}
 }else { echo "No ha asociado bien el usuario";}
 
 

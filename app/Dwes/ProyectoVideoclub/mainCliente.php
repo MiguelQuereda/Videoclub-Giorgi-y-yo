@@ -27,6 +27,9 @@ if (!isset($_SESSION['usuario'])) {
 
 <body>
     <h2> Bienvenido <?= $usuario ?></h2>
+    <?php
+        
+    ?>
     <a href="logout.php"><i>Cerrar sesión</i></a>
 </body>
 
