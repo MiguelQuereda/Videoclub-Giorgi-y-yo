@@ -1,6 +1,8 @@
 <?php
 namespace Dwes\ProyectoVideoclub;
 use Dwes\ProyectoVideoclub\Util\VideoclubException;
+include_once("Cliente.php");
+
 include_once("../../../autoload.php");
 if(!isset($_SESSION)) {
     session_start();
@@ -28,7 +30,7 @@ if (!isset($_SESSION['usuario'])) {
 <body>
     <h2> Bienvenido <?= $usuario ?></h2>
     <?php
-        
+    
     ?>
     <a href="logout.php"><i>Cerrar sesión</i></a>
 </body>
