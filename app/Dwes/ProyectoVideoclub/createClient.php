@@ -1,16 +1,16 @@
 <?php
+namespace Dwes\ProyectoVideoclub;
+use Dwes\ProyectoVideoclub\Util\VideoclubException;
+include_once("../../../autoload.php");
 
 if(!isset($_SESSION)) {
     session_start();
 }
-if(!isset($_POST["usuario"])){
-    $error= "No has entrado con sesion";
+if(!isset($_POST["usuario"]) || empty($_POST["usuario"])){
+    $error= "No has enviado ningún usuario";
     include_once("formCreateClient.php");
+}else{
+    $videoclub =$_SESSION["videoclub"];
 }
-// Y comprobamos que el usuario se haya autentificado
-/*if (!isset($_SESSION['usuario'])) {
-   die("Error - debe <a href='410index.php'>identificarse</a>.<br />");
-}*/// De estas forma, aparece el mensaje por duplicado, pero no redirecciona
-if (!isset($_SESSION['usuario'])) {
-    die("<br />Error - debe identificarse correctamente <a href='410index.php'> Ir al inicio </a>.");
- }
+
+

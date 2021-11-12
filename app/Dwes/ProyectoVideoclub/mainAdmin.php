@@ -5,8 +5,7 @@ include_once("../../../autoload.php");
 
 // Prueba
 try {
-    $vc = new Videoclub("Severo");
-
+    $vc =$_SESSION["videoclub"];
     //voy a incluir unos cuantos soportes de prueba 
     $vc->incluirJuego("God of War", 19.99, "PS4", 1, 1);
     $vc->incluirJuego("The Last of Us Part II", 49.99, "PS4", 1, 1);
@@ -78,6 +77,8 @@ $usuario = $_SESSION["usuario"];
       <?php
     $vc->listarProductos();
     ?>
+
+    <h3><a href="formCreteSoporte.php">Crear soporte</a></h3>
     
 </body>
 

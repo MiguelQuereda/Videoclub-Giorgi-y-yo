@@ -6,8 +6,11 @@ use Dwes\ProyectoVideoclub\Util\VideoclubException;
 
 include_once("../../../autoload.php");
 
+$vc = new Videoclub("Severo");
+$_SESSION["videoclub"] = $vc;
+
 $arrayUsuarios = [["Jorge" => "usuario"], ["Juan" => "usuario"], ["usuario", "usuario"]];
-$nomClientes = ["Jorge","Juan","usuario"];
+$nomClientes = ["Jorge", "Juan", "usuario"];
 $_SESSION["nomClientes"] = $nomClientes;
 $_SESSION["clientes"] = [["Jorge" => "usuario"], ["Juan" => "usuario"], ["usuario", "usuario"]];
 $_SESSION["Soportes"] = "Ninguno";
@@ -21,7 +24,7 @@ if (isset($_POST['enviar'])) {
         $error = "Debes introducir un usuario y contraseña";
         include "index.php";
     } else {
-        
+
         if ($usuario == "admin" && $password == "admin") {
             // almacenamos el usuario en la sesión
             session_start();
@@ -30,11 +33,11 @@ if (isset($_POST['enviar'])) {
             // cargamos la página principal
             include "mainAdmin.php";
         } else if (in_array([$usuario => $password], $arrayUsuarios)) {
-                session_start();
-                $_SESSION['usuario'] = $usuario;
-                $_SESSION["password"] = $password;
-                // cargamos la página principal
-                include "mainCliente.php";
+            session_start();
+            $_SESSION['usuario'] = $usuario;
+            $_SESSION["password"] = $password;
+            // cargamos la página principal
+            include "mainCliente.php";
         } else {
             // Si las credenciales no son válidas, se vuelven a pedir
             $error = "Usuario o contraseña no válidos!";
