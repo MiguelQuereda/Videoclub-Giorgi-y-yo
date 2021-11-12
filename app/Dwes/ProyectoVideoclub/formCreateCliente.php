@@ -15,9 +15,9 @@ if(!isset($error)){
 
 <body>
     <h3><?= $error ?></h3>
-    <form enctype="multipart/form-data" action="createClient.php" method="POST">
+    <form enctype="multipart/form-data" action="createCliente.php" method="POST">
         <label for="nombre"> Nombre del nuevo cliente: </label><br>
-        <input type="text" name="anchura" /><br>
+        <input type="text" name="nombre" /><br>
         <br>
         <input type="submit" name="btnSubir" value="Subir" />
     </form>
