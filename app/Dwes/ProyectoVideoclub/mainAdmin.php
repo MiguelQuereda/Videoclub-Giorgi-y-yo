@@ -79,6 +79,7 @@ $usuario = $_SESSION["usuario"];
     ?>
 
     <h3><a href="formCreteSoporte.php">Crear soporte</a></h3>
+    <h3><a href="removeCliente.php">Borrar clientes</a></h3>
     
 </body>
 
