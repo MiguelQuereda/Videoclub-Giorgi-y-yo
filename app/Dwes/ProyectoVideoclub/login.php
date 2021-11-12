@@ -5,9 +5,10 @@ namespace Dwes\ProyectoVideoclub;
 use Dwes\ProyectoVideoclub\Util\VideoclubException;
 
 include_once("../../../autoload.php");
-
+session_start();
 $vc = new Videoclub("Severo");
 $_SESSION["videoclub"] = $vc;
+
 
 $arrayUsuarios = [["Jorge" => "usuario"], ["Juan" => "usuario"], ["usuario", "usuario"]];
 $nomClientes = ["Jorge", "Juan", "usuario"];
@@ -27,13 +28,13 @@ if (isset($_POST['enviar'])) {
 
         if ($usuario == "admin" && $password == "admin") {
             // almacenamos el usuario en la sesión
-            session_start();
+            //session_start();
             $_SESSION['usuario'] = $usuario;
             $_SESSION["password"] = $password;
             // cargamos la página principal
             include "mainAdmin.php";
         } else if (in_array([$usuario => $password], $arrayUsuarios)) {
-            session_start();
+            //session_start();
             $_SESSION['usuario'] = $usuario;
             $_SESSION["password"] = $password;
             // cargamos la página principal

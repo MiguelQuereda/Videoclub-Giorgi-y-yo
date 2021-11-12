@@ -26,7 +26,7 @@ if ((!isset($_POST["nombre"]) || empty($_POST["nombre"])) &&
     $u ->setPassword($pass);
     $_SESSION["usuario"] = $user;
     $_SESSION["password"] = $pass;
-    $_SESSION["nombre"] = $nomb;
+    $_SESSION["nomCliente"] = $nomb;
      
 
     echo "El usuario ha sido actualizado con exito. ¿ Que deseas hacer ?  <br>";
