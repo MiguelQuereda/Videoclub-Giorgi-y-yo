@@ -30,8 +30,10 @@ if (!isset($_SESSION['usuario'])) {
 <body>
     <h2> Bienvenido <?= $usuario ?></h2>
     <?php
-    
+    $vc=$_SESSION["videoclub"];
+    $user = $vc->socios[$this->usuario = $usuario];
     ?>
+    <a href="formUpdateCliente.php">Modificar datos de cliente</a>
     <a href="logout.php"><i>Cerrar sesión</i></a>
 </body>
 

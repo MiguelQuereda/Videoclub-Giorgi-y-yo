@@ -1,16 +1,27 @@
 <?php
+
 namespace Dwes\ProyectoVideoclub;
+
 use Dwes\ProyectoVideoclub\Util\VideoclubException;
+
 include_once("../../../autoload.php");
 
-if(!isset($_SESSION)) {
+if (!isset($_SESSION)) {
     session_start();
 }
-if(!isset($_POST["usuario"]) || empty($_POST["usuario"])){
-    $error= "No has enviado ningún usuario";
+$usuario = $_SESSION["usuario"];
+if (!isset($_POST["nombre"]) || empty($_POST["nombre"])) {
+    $error = "No has enviado ningún usuario";
     include_once("formCreateClient.php");
-}else{
-    $videoclub =$_SESSION["videoclub"];
+} else {
+    $usuario = $_POST["nombre"];
+    $vc = $_SESSION["videoclub"];
+    $vc->incluirSocio($usuario);
+    echo "El usuario ha sido registrado con exito. ¿ Que deseas hacer ?  <br>";
+    if ($usuario == "admin") {
+        echo "<a href='mainAdmin.php'>Volver a la página. </a><br>";
+    } else{
+        echo "<a href='mainCliente.php'>Volver a la página. </a><br>";
+    }
+    echo "<a href='logout.php'>Desconectarse. </a><br>";
 }
-
-

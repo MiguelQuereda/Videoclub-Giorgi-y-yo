@@ -34,6 +34,17 @@ class Cliente
         return $this;
     }
 
+    public function setUsuario($nuevoUsuario){
+        $this->usuario=$nuevoUsuario;
+    }
+
+    public function setPassword($nuevaPassword){
+        $this->password=$nuevaPassword;
+    }
+
+    public function setNombre($nuevoNombre){
+        $this->nombre = $nuevoNombre;
+    }
 
     //GETTER
     public function getNumero(): int
@@ -141,5 +152,7 @@ class Cliente
         echo "Nombre de usuario: " . $this->usuario;
     }
 
+    
+    
     
 }
