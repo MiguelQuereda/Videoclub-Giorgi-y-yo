@@ -16,6 +16,7 @@ if ((!isset($_POST["nombre"]) || empty($_POST["nombre"])) &&
     $error = "No has rellenado todos los campos";
     include_once("formCreateClient.php");
 } else {
+    $usuario = $_SESSION["usuario"];
     $vc = $_SESSION["videoclub"];
     $nomb = $_POST["nombre"];
     $user = $_POST["user"];
