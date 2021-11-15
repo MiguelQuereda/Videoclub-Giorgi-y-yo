@@ -1,11 +1,16 @@
 <?php
-namespace Dwes\ProyectoVideoclub;
-use Dwes\ProyectoVideoclub\Util\VideoclubException;
-include_once("../../../autoload.php");
 
+namespace Dwes\ProyectoVideoclub;
+
+use Dwes\ProyectoVideoclub\Util\VideoclubException;
+
+include_once("../../../autoload.php");
+loginAdmin();
+// $vc es igual a videoclub
+$usuario = $_SESSION["usuario"];
 // Prueba
 try {
-    $vc =$_SESSION["videoclub"];
+    $vc = $_SESSION["videoclub"];
     //voy a incluir unos cuantos soportes de prueba 
     $vc->incluirJuego("God of War", 19.99, "PS4", 1, 1);
     $vc->incluirJuego("The Last of Us Part II", 49.99, "PS4", 1, 1);
@@ -34,26 +39,11 @@ try {
 
     //listo los socios 
     //$vc->listarSocios();
-} catch (VideoclubException $e){
-    echo"Se ha producido un error: ".$e->getMessage();
+} catch (VideoclubException $e) {
+    echo "Se ha producido un error: " . $e->getMessage();
 }
 
-if (!isset($_SESSION)) {
-    session_start();
-}
-if (!isset($_SESSION["usuario"]) && !isset($_SESSION["password"])) {
-    $error = "No has entrado con sesion";
-    include_once("index.php");
-} else if ($_SESSION["usuario"] != "admin" && $_SESSION["password"] != "admin") {
-    echo "No has entrado con sesion";
-    include_once("index.php");
-}
 
-if (!isset($_SESSION['usuario'])) {
-    die("<br />Error - debe identificarse correctamente <a href='index.php'> Ir al inicio </a>.");
-}
-
-$usuario = $_SESSION["usuario"];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -71,16 +61,16 @@ $usuario = $_SESSION["usuario"];
     <br>
     <h3>Socios:</h3>
     <?php
-    $vc->listarSocios();
+    $vc->listarSociosHTML();
     ?>
     <h3>Productos:</h3>
-      <?php
+    <?php
     $vc->listarProductos();
     ?>
 
     <h3><a href="formCreteSoporte.php">Crear soporte</a></h3>
     <h3><a href="removeCliente.php">Borrar clientes</a></h3>
-    
+
 </body>
 
 </html>

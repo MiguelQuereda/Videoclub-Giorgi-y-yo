@@ -6,9 +6,7 @@ use Dwes\ProyectoVideoclub\Util\VideoclubException;
 
 include_once("../../../autoload.php");
 
-if (!isset($_SESSION)) {
-    session_start();
-}
+loginAdmin();
 $usuario = $_SESSION["usuario"];
 if ((!isset($_POST["nombre"]) || empty($_POST["nombre"])) && 
     (!isset($_POST["user"]) || empty($_POST["user"])) && 
@@ -21,7 +19,7 @@ if ((!isset($_POST["nombre"]) || empty($_POST["nombre"])) &&
     $nomb = $_POST["nombre"];
     $user = $_POST["user"];
     $pass = $_POST["pass"];
-    $u = $vc->socios[$this->usuario = $usuario];
+    $u = $vc->getSocios()[$usuario];
     $u ->setNombre($nomb);
     $u ->setUsuario($user);
     $u ->setPassword($pass);

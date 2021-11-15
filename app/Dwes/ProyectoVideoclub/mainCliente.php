@@ -2,21 +2,12 @@
 namespace Dwes\ProyectoVideoclub;
 use Dwes\ProyectoVideoclub\Util\VideoclubException;
 include_once("Cliente.php");
-
 include_once("../../../autoload.php");
-if(!isset($_SESSION)) {
-    session_start();
-}
-if(!isset($_SESSION["usuario"]) && !isset($_SESSION["password"])){
-    $error= "No has entrado con sesion";
-    include_once("index.php");
-}
 
-if (!isset($_SESSION['usuario'])) {
-    die("<br />Error - debe identificarse correctamente <a href='index.php'> Ir al inicio </a>.");
- }
+loginUser();
 
- $usuario = $_SESSION["usuario"];
+$vc =$_SESSION["videoclub"];
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

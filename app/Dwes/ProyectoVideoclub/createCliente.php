@@ -6,9 +6,7 @@ use Dwes\ProyectoVideoclub\Util\VideoclubException;
 
 include_once("../../../autoload.php");
 
-if (!isset($_SESSION)) {
-    session_start();
-}
+loginAdmin();
 $usuario = $_SESSION["usuario"];
 if (!isset($_POST["nombre"]) || empty($_POST["nombre"])) {
     $error = "No has enviado ningún usuario";
@@ -20,7 +18,7 @@ if (!isset($_POST["nombre"]) || empty($_POST["nombre"])) {
     echo "El usuario ha sido registrado con exito. ¿ Que deseas hacer ?  <br>";
     if ($usuario == "admin") {
         echo "<a href='mainAdmin.php'>Volver a la página. </a><br>";
-    } else{
+    } else {
         echo "<a href='mainCliente.php'>Volver a la página. </a><br>";
     }
     echo "<a href='logout.php'>Desconectarse. </a><br>";

@@ -1,5 +1,5 @@
 <?php
-
+loginUser();
 $usuario = $_POST["usuario"];
 
 //Comprobamos que es el admin el que accede a la página
@@ -14,7 +14,7 @@ if ($_SESSION['usuario'] == "admin" && $_SESSION['password'] == "admin") {
     if (in_array([$usuario], $_SESSION["usuario"])) {
 
         $vc = $_SESSION["videoclub"];
-        $u = $vc->socios[$this->usuario = $usuario];
+        $u = $vc->getSocios()[$usuario];
         unset($u);
         unset($_SESSION[$usuario]);
     } else {

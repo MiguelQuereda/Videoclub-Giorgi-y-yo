@@ -55,6 +55,9 @@ class VideoClub
         return $this->numTotalAlquileres;
     }
 
+    public function getSocios() : array {
+        return $this->socios;
+    }
     //MÉTODOS
     private function incluirProducto(Soporte $s)
     {
@@ -101,12 +104,35 @@ class VideoClub
         }
     }
 
+    public function listarProductosHTML()
+    {
+        $numProductos = count($this->productos);
+        $cadena = "<ol>Listado de socios : $numProductos";
+        foreach ($this->productos as $p) {
+            $cadena.= "<li>".$p->muestraResumen()."</li>";
+        }
+        $cadena.="</ol>";
+
+        return $cadena;
+    }
+
     public function listarSocios()
     {
         foreach ($this->socios as $s) {
             echo $s->muestraResumen();
             echo "<br>";
         }
+    }
+
+    public function listarSociosHTML()
+    {
+        $numSocios = count($this->socios);
+        $cadena = "<ol>Listado de socios : $numSocios";
+        foreach ($this->socios as $s) {
+            $cadena.= "<li>".$s->muestraResumen()."</li>";
+        }
+        $cadena.= "</ol>";
+        return $cadena;
     }
 
     public function alquilaSocioProducto($numeroCliente, $numeroSoporte)

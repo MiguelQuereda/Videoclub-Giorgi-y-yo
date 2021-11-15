@@ -1,7 +1,5 @@
 <?php 
-if(!isset($error)){
-    $error = "";
-}
+loginAdmin();
 ?>
 <!DOCTYPE html>
 <html lang="es">
