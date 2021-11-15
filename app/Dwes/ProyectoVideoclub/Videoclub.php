@@ -55,7 +55,8 @@ class VideoClub
         return $this->numTotalAlquileres;
     }
 
-    public function getSocios() : array {
+    public function getSocios(): array
+    {
         return $this->socios;
     }
     //MÉTODOS
@@ -109,9 +110,9 @@ class VideoClub
         $numProductos = count($this->productos);
         $cadena = "<ol>Listado de socios : $numProductos";
         foreach ($this->productos as $p) {
-            $cadena.= "<li>".$p->muestraResumen()."</li>";
+            $cadena .= "<li>" . $p->muestraResumen() . "</li>";
         }
-        $cadena.="</ol>";
+        $cadena .= "</ol>";
 
         return $cadena;
     }
@@ -129,9 +130,9 @@ class VideoClub
         $numSocios = count($this->socios);
         $cadena = "<ol>Listado de socios : $numSocios";
         foreach ($this->socios as $s) {
-            $cadena.= "<li>".$s->muestraResumen()."</li>";
+            $cadena .= "<li>" . $s->muestraResumen() . "</li>";
         }
-        $cadena.= "</ol>";
+        $cadena .= "</ol>";
         return $cadena;
     }
 

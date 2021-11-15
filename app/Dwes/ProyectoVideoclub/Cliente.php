@@ -20,6 +20,7 @@ class Cliente
         public string $nombre,
         private int $numero,
         private int $maxAlquilerConcurrente = 3,
+        private int $id = $numero,
         private string $user = "usuario",
         private string $password = "usuario"
     ) {
@@ -50,6 +51,11 @@ class Cliente
     public function getNumero(): int
     {
         return $this->numero;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
     }
 
     public function getNumSoporteAlquilados(): int
