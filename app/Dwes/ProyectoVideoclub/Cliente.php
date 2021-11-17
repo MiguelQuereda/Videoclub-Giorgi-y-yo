@@ -148,6 +148,11 @@ class Cliente
     }
     public function muestraResumen()
     {
+        $cadena = "";
+        $cadena .="<p>"."Cliente número: ". $this->numero ."</p>";
+        $cadena .="<p>"."Nombre: ". $this->nombre ."</p>";
+        $cadena .="<p>"."Número de alquileres: ". $this->getNumSoporteAlquilados() ."</p>";
+        echo "Cliente número: ".$this->numero;
         echo "Nombre: " . $this->nombre . "<br>";
         echo "Número de alquileres: " . $this->getNumSoporteAlquilados() . "<br>";
     }

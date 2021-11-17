@@ -12,9 +12,9 @@ if ($_SESSION['usuario'] == "admin" && $_SESSION['password'] == "admin") {
 
     //Si el cliente esta dentro de sesión, lo borramos
     if (in_array([$usuario], $_SESSION["usuario"])) {
-
+        $id= $_POST["id"];
         $vc = $_SESSION["videoclub"];
-        $u = $vc->getSocios()[$usuario];
+        $u = $vc->getSocios()[$id];
         unset($u);
         unset($_SESSION[$usuario]);
     } else {

@@ -13,8 +13,14 @@ loginAdmin();
 
 <body>
     <h3><?= $error ?></h3>
+    <?php
+    $vc = $_SESSION["videoclub"];
+    $vc->listarSociosHTML(); ?>
     <form enctype="multipart/form-data" action="updateClient.php" method="POST">
-        <label for="nombre"> Nuevo nombre del cliente: </label><br>
+        <label for="id"> Número del cliente: </label><br>
+        <input type="text" name="id" /><br>
+        <br>
+        <label for="nombre"> Nombre del cliente: </label><br>
         <input type="text" name="nombre" /><br>
         <br>
         <label for="user"> Nuevo usuario del nuevo cliente: </label><br>

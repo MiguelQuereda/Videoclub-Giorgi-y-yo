@@ -14,12 +14,14 @@ if ((!isset($_POST["nombre"]) || empty($_POST["nombre"])) &&
     $error = "No has rellenado todos los campos";
     include_once("formCreateClient.php");
 } else {
+    $id= $_POST["id"];
+   
     $usuario = $_SESSION["usuario"];
     $vc = $_SESSION["videoclub"];
     $nomb = $_POST["nombre"];
     $user = $_POST["user"];
     $pass = $_POST["pass"];
-    $u = $vc->getSocios()[$usuario];
+    $u = $vc->getSocios()[$id];
     $u ->setNombre($nomb);
     $u ->setUsuario($user);
     $u ->setPassword($pass);

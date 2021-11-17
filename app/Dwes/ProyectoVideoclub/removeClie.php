@@ -12,10 +12,15 @@ loginUser();
 </head>
 
 <body>
+    <?php
+    $vc = $_SESSION["videoclub"];
+    $vc->listarSociosHTML(); ?>
     <form enctype="multipart/form-data" action="removeCliente.php" method="POST">
         <label for="usuario"> Escribe el nombre del cliente que quieras borrar: </label><br>
         <input type="text" name="nombre" /><br>
         <br>
+        <label for="id"> Escribe el número del cliente que quieres eliminar: </label><br>
+        <input type="text" name="id" /><br>
         <input type="reset" value="Restaurar">
         <input type="submit" name="btnSubir" value="Borrar" />
     </form>
