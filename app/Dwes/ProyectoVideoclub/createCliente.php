@@ -1,17 +1,14 @@
 <?php
-
 namespace Dwes\ProyectoVideoclub;
 
 use Dwes\ProyectoVideoclub\Util\VideoclubException;
 
 include_once("../../../autoload.php");
-
-loginAdmin();
-$usuario = $_SESSION["usuario"];
 if (!isset($_POST["nombre"]) || empty($_POST["nombre"])) {
     $error = "No has enviado ningún usuario";
     include_once("formCreateClient.php");
 } else {
+    session_start();
     $usuario = $_POST["nombre"];
     $vc = $_SESSION["videoclub"];
     $vc->incluirSocio($usuario);

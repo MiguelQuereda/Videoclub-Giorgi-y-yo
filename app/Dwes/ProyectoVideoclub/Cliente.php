@@ -20,7 +20,6 @@ class Cliente
         public string $nombre,
         private int $numero,
         private int $maxAlquilerConcurrente = 3,
-        private int $id = $numero,
         private string $user = "usuario",
         private string $password = "usuario"
     ) {

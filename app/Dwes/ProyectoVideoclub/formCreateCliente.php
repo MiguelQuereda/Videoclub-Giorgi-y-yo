@@ -1,5 +1,5 @@
 <?php 
-loginAdmin();
+namespace Dwes\ProyectoVideoclub;
 ?>
 <!DOCTYPE html>
 <html lang="es">

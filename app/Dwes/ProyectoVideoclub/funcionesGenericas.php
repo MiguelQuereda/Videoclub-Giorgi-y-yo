@@ -1,4 +1,5 @@
 <?php
+namespace Dwes\ProyectoVideoclub;
 function loginUser()
 {
     if (!isset($error)) {
@@ -15,8 +16,8 @@ function loginUser()
 
     function loginAdmin()
     {
-        loginUser();
 
+        
         if ($_SESSION["usuario"] != "admin" && $_SESSION["password"] != "admin") {
             echo "No has entrado con sesion";
             header("Location: index.php");

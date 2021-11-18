@@ -6,7 +6,22 @@ use Dwes\ProyectoVideoclub\Util\VideoclubException;
 
 include_once("../../../autoload.php");
 
-loginAdmin();
+
+if (!isset($error)) {
+    $error = "";
+}
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+if (!isset($_SESSION['usuario'])) {
+    die("Error - debe <a href='index.php'>identificarse</a>");
+}
+if ($_SESSION["usuario"] != "admin" && $_SESSION["password"] != "admin") {
+    echo "No has entrado con sesion";
+    header("Location: index.php");
+}
+
 $usuario = $_SESSION["usuario"];
 if ((!isset($_POST["nombre"]) || empty($_POST["nombre"])) && 
     (!isset($_POST["user"]) || empty($_POST["user"])) && 
@@ -15,7 +30,6 @@ if ((!isset($_POST["nombre"]) || empty($_POST["nombre"])) &&
     include_once("formCreateClient.php");
 } else {
     $id= $_POST["id"];
-   
     $usuario = $_SESSION["usuario"];
     $vc = $_SESSION["videoclub"];
     $nomb = $_POST["nombre"];

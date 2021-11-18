@@ -5,7 +5,23 @@ namespace Dwes\ProyectoVideoclub;
 use Dwes\ProyectoVideoclub\Util\VideoclubException;
 
 include_once("../../../autoload.php");
-loginAdmin();
+
+
+if (!isset($error)) {
+    $error = "";
+}
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+if (!isset($_SESSION['usuario'])) {
+    die("Error - debe <a href='index.php'>identificarse</a>");
+}
+if ($_SESSION["usuario"] != "admin" && $_SESSION["password"] != "admin") {
+    echo "No has entrado con sesion";
+    header("Location: index.php");
+}
+
 // $vc es igual a videoclub
 $usuario = $_SESSION["usuario"];
 // Prueba
@@ -68,8 +84,8 @@ try {
     $vc->listarProductos();
     ?>
 
-    <h3><a href="formCreteSoporte.php">Crear soporte</a></h3>
-    <h3><a href="removeCliente.php">Borrar clientes</a></h3>
+    <h3><a href="formCreateCliente.php">Crear soporte</a></h3>
+    <h3><a href="removeClie.php">Borrar clientes</a></h3>
 
 </body>
 

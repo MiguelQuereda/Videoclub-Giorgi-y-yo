@@ -1,5 +1,9 @@
 <?php
-loginUser();
+namespace Dwes\ProyectoVideoclub;
+
+session_start();
+    $vc = $_SESSION["videoclub"];
+    $vc->listarSociosHTML();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,8 +17,7 @@ loginUser();
 
 <body>
     <?php
-    $vc = $_SESSION["videoclub"];
-    $vc->listarSociosHTML(); ?>
+     ?>
     <form enctype="multipart/form-data" action="removeCliente.php" method="POST">
         <label for="usuario"> Escribe el nombre del cliente que quieras borrar: </label><br>
         <input type="text" name="nombre" /><br>
